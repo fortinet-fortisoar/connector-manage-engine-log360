@@ -1,0 +1,331 @@
+{
+  "name": "manage-engine-log360",
+  "label": "ManageEngine Log360",
+  "description": "ManageEngine Log360 is a unified SIEM solution with integrated DLP and CASB capabilities that detects, prioritizes, investigates, and responds to security threats.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "1.0.0",
+  "category": "SIEM",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url",
+        "placeholder": "https://<hostname>:<port>",
+        "description": "Specify the URL of the ManageEngine Log360 server to which you will connect and perform the automated operations.",
+        "tooltip": "Specify the URL of the ManageEngine Log360 server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "API Key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "token",
+        "description": "Specify the API key that is configured for your account to access the ManageEngine Log360 endpoint.",
+        "tooltip": "Specify the API key that is configured for your account to access the ManageEngine Log360 endpoint."
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "invoke_search",
+      "title": "Invoke Search",
+      "description": "Invokes a search on the ManageEngine Log360 server.",
+      "category": "investigation",
+      "annotation": "invoke_search",
+      "output_schema": {
+          "cursor": "",
+          "results": {
+              "hits": [
+                  {
+                      "COMMON_SEVERITY": "",
+                      "IS_THROWAWAY": "",
+                      "HOSTNAME": "",
+                      "APPID": "",
+                      "FORMATID": "",
+                      "RAWLOG": "",
+                      "TIME": "",
+                      "IMPORTED_TIME": "",
+                      "HOSTID": "",
+                      "IPAddress2": ""
+                  }
+              ],
+              "total_hits": "",
+              "hits_count_in_current_page": ""
+          }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Search Query",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query",
+          "tooltip": "Specify the query for the search that you want to run on the ManageEngine Log360 server.",
+          "description": "Specify the query for the search that you want to run on the ManageEngine Log360 server."
+        },
+        {
+          "title": "From",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "from",
+          "tooltip": "Specify the start time for search.",
+          "description": "Specify the start time for search."
+        },
+        {
+          "title": "To",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "to",
+          "tooltip": "Specify the End time for search.",
+          "description": "Specify the End time for search."
+        },
+        {
+          "title": "Hosts",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "hosts",
+          "tooltip": "Specify the comma-separated list of hosts to search. Default value = all",
+          "description": "Specify the comma-separated list of hosts to search. Default value = all"
+        },
+        {
+          "title": "Groups",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "groups",
+          "tooltip": "Specify the comma-separated list of groups to search. Default value = all",
+          "description": "Specify the comma-separated list of groups to search. Default value = all"
+        }
+      ]
+    },
+    {
+      "operation": "get_alerts",
+      "title": "Get Alerts List",
+      "description": "Retrieves a detailed list of alerts from the ManageEngine Log360 server based on filters like query, severity, status and other criteria that you have specified.",
+      "category": "investigation",
+      "annotation": "get_alerts",
+      "output_schema": {
+          "cursor": "",
+          "results": {
+              "hits": [
+                  {
+                      "Policy": "",
+                      "Alert_Status": "",
+                      "Operation Type": "",
+                      "Message": "",
+                      "Alert_Profile_Name": "",
+                      "Destination Name": "",
+                      "Event Details": "",
+                      "Time": "",
+                      "Source": "",
+                      "DisplayName": "",
+                      "Application Name": "",
+                      "Disk": "",
+                      "Task Category": "",
+                      "User Id": "",
+                      "Source Name": "",
+                      "Source Region": "",
+                      "Device": "",
+                      "Action ID": "",
+                      "LogType": "",
+                      "Alert_Severity": "",
+                      "Device Type": "",
+                      "Severity": "",
+                      "Destination Region": "",
+                      "Event ID": "",
+                      "Category Id": "",
+                      "Event Correlator": "",
+                      "Type": "",
+                      "Username": "",
+                      "State": "",
+                      "Object": "",
+                      "Severity Type": ""
+                  }
+              ],
+              "total_hits": "",
+              "hits_count_in_current_page": ""
+          }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "From",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "from",
+          "tooltip": "Specify the start time for search.",
+          "description": "Specify the start time for search."
+        },
+        {
+          "title": "To",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "to",
+          "tooltip": "Specify the end time for search.",
+          "description": "Specify the end time for search."
+        },
+        {
+          "title": "Search Query",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query",
+          "tooltip": "Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = *",
+          "description": "Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = *"
+        },
+        {
+          "title": "Alert Profiles",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "alert_profiles",
+          "tooltip": "Specify the comma-separated list of alert profiles to filter alerts. Default value = all",
+          "description": "Specify the comma-separated list of alert profiles to filter alerts. Default value = all"
+        },
+        {
+          "title": "Severity",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "Critical",
+            "Trouble",
+            "Attention"
+          ],
+          "name": "severity",
+          "tooltip": "Select severity to filter alerts retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
+          "description": "Select severity to filter alerts retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention"
+        },
+        {
+          "title": "Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "Open",
+            "Closed",
+            "Inprogress"
+          ],
+          "name": "status",
+          "tooltip": "Select status to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nClosed \n\nInprogress",
+          "description": "Select status to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nClosed \n\nInprogress"
+        }
+      ]
+    },
+    {
+      "operation": "get_alert_profiles",
+      "title": "Get Alert Profiles List",
+      "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on filters like type, severity and status.",
+      "category": "investigation",
+      "annotation": "get_alert_profiles",
+      "output_schema": {
+          "Number of Records": "",
+          "Correlation Alert Profiles": [
+              {
+                  "Status": "",
+                  "Type": "",
+                  "Severity": "",
+                  "Alert Id": "",
+                  "Alert Profile Name": "",
+                  "Notifications": []
+              }
+          ],
+          "Profile Based Alerts": [
+              {
+                  "Status": "",
+                  "Type": "",
+                  "Severity": "",
+                  "Alert Id": "",
+                  "Alert Profile Name": "",
+                  "Notifications": []
+              }
+          ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "Correlation",
+            "Custom",
+            "Predefined"
+          ],
+          "name": "type",
+          "tooltip": "Select type to filter alert profiles retrieved based on your selection from the following options:  \n\nCorrelation \n\nCustom \n\nPredefined",
+          "description": "Select type to filter alert profiles retrieved based on your selection from the following options:  \n\nCorrelation \n\nCustom \n\nPredefined"
+        },
+        {
+          "title": "Severity",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "Critical",
+            "Trouble",
+            "Attention"
+          ],
+          "name": "severity",
+          "tooltip": "Select severity to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
+          "description": "Select severity to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention"
+        },
+        {
+          "title": "Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "Enabled",
+            "Disabled"
+          ],
+          "name": "status",
+          "tooltip": "Select status to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled ",
+          "description": "Select status to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled "
+        }
+      ]
+    }
+  ]
+}
