@@ -66,7 +66,7 @@ class ManageEngine:
         search_result = resp.get('results').get('hits')
         while resp.get('cursor'):
             resp = self.make_api_call(endpoint, data={"cursor": resp.get('cursor')})
-            search_result.append(resp.get('results').get('hits'))
+            search_result.extend(resp.get('results').get('hits'))
         return search_result
 
 

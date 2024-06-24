@@ -10,6 +10,10 @@
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "help_online": "",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
   "configuration": {
     "fields": [
       {
