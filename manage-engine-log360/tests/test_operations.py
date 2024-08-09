@@ -1,4 +1,11 @@
 # Edit the config_and_params.json file and add the necessary parameter values.
+
+"""
+Copyright start
+MIT License
+Copyright (c) 2024 Fortinet Inc
+Copyright end
+"""
     
 import os
 import sys
