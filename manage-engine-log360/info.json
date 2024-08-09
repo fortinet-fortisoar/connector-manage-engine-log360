@@ -23,7 +23,6 @@
         "visible": true,
         "type": "text",
         "name": "server_url",
-        "placeholder": "https://<hostname>:<port>",
         "description": "Specify the URL of the ManageEngine Log360 server to which you will connect and perform the automated operations.",
         "tooltip": "Specify the URL of the ManageEngine Log360 server to which you will connect and perform the automated operations."
       },
@@ -58,25 +57,42 @@
       "category": "investigation",
       "annotation": "invoke_search",
       "output_schema": {
-          "cursor": "",
-          "results": {
-              "hits": [
-                  {
-                      "COMMON_SEVERITY": "",
-                      "IS_THROWAWAY": "",
-                      "HOSTNAME": "",
-                      "APPID": "",
-                      "FORMATID": "",
-                      "RAWLOG": "",
-                      "TIME": "",
-                      "IMPORTED_TIME": "",
-                      "HOSTID": "",
-                      "IPAddress2": ""
-                  }
-              ],
-              "total_hits": "",
-              "hits_count_in_current_page": ""
-          }
+        "cursor": "",
+        "results": {
+          "hits": [
+            {
+              "Disk": "",
+              "Time": "",
+              "Type": "",
+              "Device": "",
+              "Object": "",
+              "Policy": "",
+              "Source": "",
+              "LogType": "",
+              "Message": "",
+              "User Id": "",
+              "Event ID": "",
+              "Severity": "",
+              "Username": "",
+              "Action ID": "",
+              "Category Id": "",
+              "Device Type": "",
+              "DisplayName": "",
+              "Source Name": "",
+              "Event Details": "",
+              "Severity Type": "",
+              "Source Region": "",
+              "Task Category": "",
+              "Operation Type": "",
+              "Application Name": "",
+              "Destination Name": "",
+              "Event Correlator": "",
+              "Destination Region": ""
+            }
+          ],
+          "total_hits": "",
+          "hits_count_in_current_page": ""
+        }
       },
       "enabled": true,
       "parameters": [
@@ -87,6 +103,7 @@
           "visible": true,
           "type": "text",
           "name": "query",
+          "placeholder": "e.g. EVENTID = xxxxx",
           "tooltip": "Specify the query for the search that you want to run on the ManageEngine Log360 server.",
           "description": "Specify the query for the search that you want to run on the ManageEngine Log360 server."
         },
@@ -97,8 +114,8 @@
           "visible": true,
           "type": "datetime",
           "name": "from",
-          "tooltip": "Specify the start time for search.",
-          "description": "Specify the start time for search."
+          "tooltip": "Specify the start time for search. Default: current time - 24 hours.",
+          "description": "Specify the start time for search. Default: current time - 24 hours."
         },
         {
           "title": "To",
@@ -107,8 +124,8 @@
           "visible": true,
           "type": "datetime",
           "name": "to",
-          "tooltip": "Specify the End time for search.",
-          "description": "Specify the End time for search."
+          "tooltip": "Specify the End time for search. Default: current time.",
+          "description": "Specify the End time for search. Default: current time."
         },
         {
           "title": "Hosts",
@@ -139,58 +156,58 @@
       "category": "investigation",
       "annotation": "get_alerts",
       "output_schema": {
-          "cursor": "",
-          "results": {
-              "hits": [
-                  {
-                      "Policy": "",
-                      "Alert_Status": "",
-                      "Operation Type": "",
-                      "Message": "",
-                      "Alert_Profile_Name": "",
-                      "Destination Name": "",
-                      "Event Details": "",
-                      "Time": "",
-                      "Source": "",
-                      "DisplayName": "",
-                      "Application Name": "",
-                      "Disk": "",
-                      "Task Category": "",
-                      "User Id": "",
-                      "Source Name": "",
-                      "Source Region": "",
-                      "Device": "",
-                      "Action ID": "",
-                      "LogType": "",
-                      "Alert_Severity": "",
-                      "Device Type": "",
-                      "Severity": "",
-                      "Destination Region": "",
-                      "Event ID": "",
-                      "Category Id": "",
-                      "Event Correlator": "",
-                      "Type": "",
-                      "Username": "",
-                      "State": "",
-                      "Object": "",
-                      "Severity Type": ""
-                  }
-              ],
-              "total_hits": "",
-              "hits_count_in_current_page": ""
-          }
+        "cursor": "",
+        "results": {
+          "hits": [
+            {
+              "Policy": "",
+              "Alert_Status": "",
+              "Operation Type": "",
+              "Message": "",
+              "Alert_Profile_Name": "",
+              "Destination Name": "",
+              "Event Details": "",
+              "Time": "",
+              "Source": "",
+              "DisplayName": "",
+              "Application Name": "",
+              "Disk": "",
+              "Task Category": "",
+              "User Id": "",
+              "Source Name": "",
+              "Source Region": "",
+              "Device": "",
+              "Action ID": "",
+              "LogType": "",
+              "Alert_Severity": "",
+              "Device Type": "",
+              "Severity": "",
+              "Destination Region": "",
+              "Event ID": "",
+              "Category Id": "",
+              "Event Correlator": "",
+              "Type": "",
+              "Username": "",
+              "State": "",
+              "Object": "",
+              "Severity Type": ""
+            }
+          ],
+          "total_hits": "",
+          "hits_count_in_current_page": ""
+        }
       },
       "enabled": true,
       "parameters": [
         {
           "title": "From",
-          "required": true,
+          "required": false,
           "editable": true,
           "visible": true,
           "type": "datetime",
           "name": "from",
-          "tooltip": "Specify the start time for search.",
-          "description": "Specify the start time for search."
+          "tooltip": "Specify the start time for search. Default: current time - 24 hours.",
+          "description": "Specify the start time for search. Default: current time - 24 hours."
         },
         {
           "title": "To",
@@ -199,8 +216,8 @@
           "visible": true,
           "type": "datetime",
           "name": "to",
-          "tooltip": "Specify the end time for search.",
-          "description": "Specify the end time for search."
+          "tooltip": "Specify the End time for search. Default: current time.",
+          "description": "Specify the End time for search. Default: current time."
         },
         {
           "title": "Search Query",
@@ -209,6 +226,7 @@
           "visible": true,
           "type": "text",
           "name": "query",
+          "placeholder": "e.g. EVENTID = xxxxx",
           "tooltip": "Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = *",
           "description": "Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = *"
         },
@@ -219,7 +237,7 @@
           "visible": true,
           "type": "text",
           "name": "alert_profiles",
-          "tooltip": "Specify the comma-separated list of alert profiles to filter alerts. Default value = all",
+          "tooltip": "Specify the comma-separated list of alert profiles to filter alerts. e.g. 1, 2, 601. Default value = all",
           "description": "Specify the comma-separated list of alert profiles to filter alerts. Default value = all"
         },
         {
@@ -261,27 +279,27 @@
       "category": "investigation",
       "annotation": "get_alert_profiles",
       "output_schema": {
-          "Number of Records": "",
-          "Correlation Alert Profiles": [
-              {
-                  "Status": "",
-                  "Type": "",
-                  "Severity": "",
-                  "Alert Id": "",
-                  "Alert Profile Name": "",
-                  "Notifications": []
-              }
-          ],
-          "Profile Based Alerts": [
-              {
-                  "Status": "",
-                  "Type": "",
-                  "Severity": "",
-                  "Alert Id": "",
-                  "Alert Profile Name": "",
-                  "Notifications": []
-              }
-          ]
+        "Number of Records": "",
+        "Correlation Alert Profiles": [
+          {
+            "Status": "",
+            "Type": "",
+            "Severity": "",
+            "Alert Id": "",
+            "Alert Profile Name": "",
+            "Notifications": []
+          }
+        ],
+        "Profile Based Alerts": [
+          {
+            "Status": "",
+            "Type": "",
+            "Severity": "",
+            "Alert Id": "",
+            "Alert Profile Name": "",
+            "Notifications": []
+          }
+        ]
       },
       "enabled": true,
       "parameters": [

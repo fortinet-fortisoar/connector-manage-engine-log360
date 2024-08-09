@@ -1,0 +1,39 @@
+{
+    "config": [
+        {
+            "server_url": "",
+            "token": "",
+            "verify_ssl": false
+        }
+    ],
+    "invoke_search": [
+        {
+            "query": null,
+            "from": null,
+            "to": null,
+            "hosts": null,
+            "groups": null
+        }
+    ],
+    "get_alerts": [
+        {
+            "from": null,
+            "to": null,
+            "query": null,
+            "alert_profiles": null,
+            "severity": [
+                "Critical"
+            ],
+            "status": [
+                "Open"
+            ]
+        }
+    ],
+    "get_alert_profiles": [
+        {
+            "type": "",
+            "severity": "",
+            "status": ""
+        }
+    ]
+}

@@ -29,24 +29,27 @@ class ManageEngine:
         }
         try:
             response = requests.request(method=method, url=url,
-                                        params=params, headers=headers, json=data, verify=self.verify_ssl)
+                                        params=params, headers=headers, json=data, verify=self.verify_ssl, timeout=60)
             if response.status_code in [200, 201, 204]:
-                if response.text != "":
+                if response.text != "" and 'ERROR_DESCRIPTION' in response.text:
+                    err_resp = response.json()
+                    failure_msg = err_resp['ERROR_DESCRIPTION']
+                    error_msg = 'Response [{0}: Details: {1}]'.format(response.status_code, failure_msg if failure_msg else '')
+                    logger.error(error_msg)
+                    raise ConnectorError(error_msg)
+                elif response.text != "":
                     return response.json()
                 else:
                     return True
             elif response.status_code == 404:
                 return response
             else:
-                if response.text != "":
-                    err_resp = response.json()
-                    failure_msg = err_resp['ERROR_DESCRIPTION']
-                    error_msg = 'Response [{0}:{1} Details: {2}]'.format(response.status_code, response.reason,
-                                                                         failure_msg if failure_msg else '')
-                else:
-                    error_msg = 'Response [{0}:{1}]'.format(response.status_code, response.reason)
-                logger.error(error_msg)
-                raise ConnectorError(error_msg)
+                failure_msg = response.reason
+                if response.text != "" and 'ERROR_DESCRIPTION' in response.text:
+                    failure_msg = response.json()['ERROR_DESCRIPTION']
+                error_msg = 'Response [{0}:{1}]'.format(response.status_code, failure_msg)
+            logger.error(error_msg)
+            raise ConnectorError(error_msg)
         except requests.exceptions.SSLError:
             logger.error('An SSL error occurred')
             raise ConnectorError('An SSL error occurred')
@@ -63,11 +66,14 @@ class ManageEngine:
             raise ConnectorError(str(err))
 
     def get_all_records(self, resp, endpoint):
+        if resp.get('results').get('total_hits') == resp.get('results').get('hits_count_in_current_page'):
+            return resp
         search_result = resp.get('results').get('hits')
         while resp.get('cursor'):
             resp = self.make_api_call(endpoint, data={"cursor": resp.get('cursor')})
             search_result.extend(resp.get('results').get('hits'))
-        return search_result
+        resp['results']['hits'] = search_result
+        return resp
 
 
 def build_params(params):
@@ -122,7 +128,7 @@ def get_alert_profiles(config, params):
 def check_health(config):
     try:
         payload = {}
-        response = get_alerts(config, params=payload)
+        response = get_alert_profiles(config, params=payload)
         if response:
             return True
     except Exception as Err:
@@ -133,5 +139,6 @@ def check_health(config):
 operations = {
     'invoke_search': invoke_search,
     'get_alerts': get_alerts,
-    'get_alert_profiles': get_alert_profiles
+    'get_alert_profiles': get_alert_profiles,
+    'check_health': check_health
 }
