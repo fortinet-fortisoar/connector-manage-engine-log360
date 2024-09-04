@@ -27,14 +27,14 @@
         "tooltip": "Specify the URL of the ManageEngine Log360 server to which you will connect and perform the automated operations."
       },
       {
-        "title": "API Key",
+        "title": "Auth Token",
         "required": true,
         "editable": true,
         "visible": true,
         "type": "password",
         "name": "token",
-        "description": "Specify the API key that is configured for your account to access the ManageEngine Log360 endpoint.",
-        "tooltip": "Specify the API key that is configured for your account to access the ManageEngine Log360 endpoint."
+        "description": "Specify the auth token generated from API Settings page to access the ManageEngine Log360 endpoint.",
+        "tooltip": "Specify the auth token generated from API Settings page to access the ManageEngine Log360 endpoint."
       },
       {
         "title": "Verify SSL",
@@ -52,8 +52,8 @@
   "operations": [
     {
       "operation": "invoke_search",
-      "title": "Invoke Search",
-      "description": "Invokes a search on the ManageEngine Log360 server.",
+      "title": "Get Events List",
+      "description": "Retrieves a detailed list of events from the ManageEngine Log360 server based on filters like search query, hosts, groups and other criteria that you have specified.",
       "category": "investigation",
       "annotation": "invoke_search",
       "output_schema": {
@@ -104,8 +104,8 @@
           "type": "text",
           "name": "query",
           "placeholder": "e.g. EVENTID = xxxxx",
-          "tooltip": "Specify the query for the search that you want to run on the ManageEngine Log360 server.",
-          "description": "Specify the query for the search that you want to run on the ManageEngine Log360 server."
+          "tooltip": "Specify the search query to retrieve events from ManageEngine Log360.",
+          "description": "Specify the search query to retrieve events from ManageEngine Log360."
         },
         {
           "title": "From",
@@ -134,8 +134,8 @@
           "visible": true,
           "type": "text",
           "name": "hosts",
-          "tooltip": "Specify the comma-separated list of hosts to search. Default value = all",
-          "description": "Specify the comma-separated list of hosts to search. Default value = all"
+          "tooltip": "Specify the comma-separated list of hosts to limit the search to these specific hosts. Default value = all",
+          "description": "Specify the comma-separated list of hosts to limit the search to these specific hosts. Default value = all"
         },
         {
           "title": "Groups",
@@ -144,15 +144,15 @@
           "visible": true,
           "type": "text",
           "name": "groups",
-          "tooltip": "Specify the comma-separated list of groups to search. Default value = all",
-          "description": "Specify the comma-separated list of groups to search. Default value = all"
+          "tooltip": "Specify the comma-separated list of groups to limit the search to these specific groups. Default value = all",
+          "description": "Specify the comma-separated list of groups to limit the search to these specific groups. Default value = all"
         }
       ]
     },
     {
       "operation": "get_alerts",
       "title": "Get Alerts List",
-      "description": "Retrieves a detailed list of alerts from the ManageEngine Log360 server based on filters like query, severity, status and other criteria that you have specified.",
+      "description": "Retrieves a detailed list of alerts from the ManageEngine Log360 server based on filters like search query, alert severity, alert status and other criteria that you have specified.",
       "category": "investigation",
       "annotation": "get_alerts",
       "output_schema": {
@@ -227,8 +227,8 @@
           "type": "text",
           "name": "query",
           "placeholder": "e.g. EVENTID = xxxxx",
-          "tooltip": "Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = *",
-          "description": "Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = *"
+          "tooltip": "Specify the search query to retrieve alerts from ManageEngine Log360. Default value = *",
+          "description": "Specify the search query to retrieve alerts from ManageEngine Log360. Default value = *"
         },
         {
           "title": "Alert Profiles",
@@ -237,11 +237,11 @@
           "visible": true,
           "type": "text",
           "name": "alert_profiles",
-          "tooltip": "Specify the comma-separated list of alert profiles to filter alerts. e.g. 1, 2, 601. Default value = all",
-          "description": "Specify the comma-separated list of alert profiles to filter alerts. Default value = all"
+          "tooltip": "Specify the comma-separated list of alert profiles to retrieve alerts matching these profiles. e.g. 1, 2, 601. Default value = all",
+          "description": "Specify the comma-separated list of alert profiles to retrieve alerts matching these profiles. e.g. 1, 2, 601. Default value = all"
         },
         {
-          "title": "Severity",
+          "title": "Alert Severity",
           "required": false,
           "editable": true,
           "visible": true,
@@ -252,11 +252,11 @@
             "Attention"
           ],
           "name": "severity",
-          "tooltip": "Select severity to filter alerts retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
-          "description": "Select severity to filter alerts retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention"
+          "tooltip": "Select the severity of the alert to filter alerts retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
+          "description": "Select the severity of the alert to filter alerts retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention"
         },
         {
-          "title": "Status",
+          "title": "Alert Status",
           "required": false,
           "editable": true,
           "visible": true,
@@ -267,15 +267,15 @@
             "Inprogress"
           ],
           "name": "status",
-          "tooltip": "Select status to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nClosed \n\nInprogress",
-          "description": "Select status to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nClosed \n\nInprogress"
+          "tooltip": "Select the status of the alert to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nClosed \n\nInprogress",
+          "description": "Select the status of the alert to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nClosed \n\nInprogress"
         }
       ]
     },
     {
       "operation": "get_alert_profiles",
       "title": "Get Alert Profiles List",
-      "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on filters like type, severity and status.",
+      "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on filters like alert profile type, alert profile severity and alert profile status.",
       "category": "investigation",
       "annotation": "get_alert_profiles",
       "output_schema": {
@@ -304,7 +304,7 @@
       "enabled": true,
       "parameters": [
         {
-          "title": "Type",
+          "title": "Alert Profile Type",
           "required": false,
           "editable": true,
           "visible": true,
@@ -315,11 +315,11 @@
             "Predefined"
           ],
           "name": "type",
-          "tooltip": "Select type to filter alert profiles retrieved based on your selection from the following options:  \n\nCorrelation \n\nCustom \n\nPredefined",
-          "description": "Select type to filter alert profiles retrieved based on your selection from the following options:  \n\nCorrelation \n\nCustom \n\nPredefined"
+          "tooltip": "Select the alert profile type to filter alert profiles retrieved based on your selection from the following options:  \n\nCorrelation \n\nCustom \n\nPredefined",
+          "description": "Select the alert profile type to filter alert profiles retrieved based on your selection from the following options:  \n\nCorrelation \n\nCustom \n\nPredefined"
         },
         {
-          "title": "Severity",
+          "title": "Alert Profile Severity",
           "required": false,
           "editable": true,
           "visible": true,
@@ -330,11 +330,11 @@
             "Attention"
           ],
           "name": "severity",
-          "tooltip": "Select severity to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
-          "description": "Select severity to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention"
+          "tooltip": "Select the severity of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
+          "description": "Select the severity of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention"
         },
         {
-          "title": "Status",
+          "title": "Alert Profile Status",
           "required": false,
           "editable": true,
           "visible": true,
@@ -344,8 +344,8 @@
             "Disabled"
           ],
           "name": "status",
-          "tooltip": "Select status to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled ",
-          "description": "Select status to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled "
+          "tooltip": "Select the status of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled ",
+          "description": "Select the status of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled "
         }
       ]
     }
