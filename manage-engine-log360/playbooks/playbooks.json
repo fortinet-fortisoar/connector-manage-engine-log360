@@ -136,10 +136,10 @@
         {
           "@type": "Workflow",
           "triggerLimit": null,
-          "name": "Invoke Search",
+          "name": "Get Events List",
           "aliasName": null,
           "tag": "#ManageEngine Log360",
-          "description": "Invokes a search on the ManageEngine Log360 server.",
+          "description": "Retrieves a detailed list of events from the ManageEngine Log360 server based on filters like search query, hosts, groups and other criteria that you have specified.",
           "isActive": false,
           "debug": false,
           "singleRecordExecution": false,
@@ -153,7 +153,7 @@
           "steps": [
             {
               "@type": "WorkflowStep",
-              "name": "Invoke Search",
+              "name": "Get Events List",
               "description": null,
               "arguments": {
                 "name": "ManageEngine Log360",
@@ -162,7 +162,7 @@
                 "version": "1.0.0",
                 "connector": "manage-engine-log360",
                 "operation": "invoke_search",
-                "operationTitle": "Invoke Search"
+                "operationTitle": "Get Events List"
               },
               "status": null,
               "top": "120",
@@ -177,7 +177,7 @@
               "description": null,
               "arguments": {
                 "route": "5a21c885-2fdd-4834-a372-e1348bcf4846",
-                "title": "ManageEngine Log360: Invoke Search",
+                "title": "ManageEngine Log360: Get Events List",
                 "resources": [
                   "alerts"
                 ],
@@ -202,7 +202,7 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "name": "Start-> Invoke Search",
+              "name": "Start-> Get Events List",
               "targetStep": "/api/3/workflow_steps/bcfc73bb-b980-4fea-aaa1-a66fec9b94dd",
               "sourceStep": "/api/3/workflow_steps/3af190d0-0b5b-44a2-a697-fd4e87918750",
               "label": null,
@@ -473,7 +473,7 @@
                   "input": {
                     "params": []
                   },
-                  "_configuration_schema": "[\n    {\n        \"title\": \"Pull Alerts Created in Last X min\",\n        \"required\": true,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"integer\",\n        \"name\": \"fetch_alerts_in_last_X_minutes\",\n        \"tooltip\": \"Specify the timeframe in minutes to pull the alerts for the first time.\"\n    },\n    {\n        \"title\": \"Search Query\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"text\",\n        \"name\": \"query\",\n        \"tooltip\": \"Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = * \"\n    },\n    {\n        \"title\": \"Alert Profiles\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"text\",\n        \"name\": \"alert_profiles\",\n        \"tooltip\": \"Specify the comma-separated list of alert profiles to filter alerts. Default value = all\"\n    },\n    {\n        \"title\": \"Severity\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"multiselect\",\n        \"options\": [\n            \"Critical\",\n            \"Trouble\",\n            \"Attention\"\n        ],\n        \"name\": \"severity\",\n        \"tooltip\": \"Select severity to filter alerts retrieved based on your selection from the following options:  \\n\\nCritical \\n\\nTrouble \\n\\nAttention\"\n    },\n    {\n        \"title\": \"Status\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"multiselect\",\n        \"options\": [\n            \"Open\",\n            \"Closed\",\n            \"Inprogress\"\n        ],\n        \"name\": \"status\",\n        \"tooltip\": \"Select status to filter alerts retrieved based on your selection from the following options:  \\n\\nOpen \\n\\nClosed \\n\\nInprogress\"\n    }\n]"
+                  "_configuration_schema": "[\n    {\n        \"title\": \"Pull Alerts Created in Last X min\",\n        \"required\": true,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"integer\",\n        \"name\": \"fetch_alerts_in_last_X_minutes\",\n        \"tooltip\": \"Specify the timeframe in minutes to pull the alerts for the first time.\"\n    },\n    {\n        \"title\": \"Search Query\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"text\",\n        \"name\": \"query\",\n        \"tooltip\": \"Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = * \"\n    },\n    {\n        \"title\": \"Alert Profiles\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"text\",\n        \"name\": \"alert_profiles\",\n        \"tooltip\": \"Specify the comma-separated list of alert profiles to filter alerts. Default value = all\"\n    },\n    {\n        \"title\": \"Alert Severity\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"multiselect\",\n        \"options\": [\n            \"Critical\",\n            \"Trouble\",\n            \"Attention\"\n        ],\n        \"name\": \"severity\",\n        \"tooltip\": \"Select severity to filter alerts retrieved based on your selection from the following options:  \\n\\nCritical \\n\\nTrouble \\n\\nAttention\"\n    },\n    {\n        \"title\": \"Alert Status\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"multiselect\",\n        \"options\": [\n            \"Open\",\n            \"Closed\",\n            \"Inprogress\"\n        ],\n        \"name\": \"status\",\n        \"tooltip\": \"Select status to filter alerts retrieved based on your selection from the following options:  \\n\\nOpen \\n\\nClosed \\n\\nInprogress\"\n    }\n]"
                 },
                 "triggerOnSource": true,
                 "triggerOnReplicate": false
@@ -624,7 +624,7 @@
           "name": "Get Alert Profiles List",
           "aliasName": null,
           "tag": "#ManageEngine Log360",
-          "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on filters like type, severity and status.",
+          "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on filters like alert profile type, alert profile severity and alert profile status.",
           "isActive": false,
           "debug": false,
           "singleRecordExecution": false,
@@ -715,7 +715,7 @@
           "name": "Get Alerts List",
           "aliasName": null,
           "tag": "#ManageEngine Log360",
-          "description": "Retrieves a detailed list of alerts from the ManageEngine Log360 server based on filters like query, severity, status and other criteria that you have specified.",
+          "description": "Retrieves a detailed list of alerts from the ManageEngine Log360 server based on filters like search query, alert severity, alert status and other criteria that you have specified.",
           "isActive": false,
           "debug": false,
           "singleRecordExecution": false,
