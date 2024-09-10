@@ -275,7 +275,7 @@
     {
       "operation": "get_alert_profiles",
       "title": "Get Alert Profiles List",
-      "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on the alert profile type, alert profile severity, and alert profile status that you have specified.",
+      "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on the alert profile type, alert profile severity, and alert profile status as the filter criteria that you have specified.",
       "category": "investigation",
       "annotation": "get_alert_profiles",
       "output_schema": {
