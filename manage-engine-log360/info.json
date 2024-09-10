@@ -9,7 +9,7 @@
   "category": "SIEM",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/manageengine-log360/945/manageengine-log360-v1-0-0",
   "ingestion_supported": true,
   "ingestion_modes": [
     "scheduled"
@@ -23,7 +23,7 @@
         "visible": true,
         "type": "text",
         "name": "server_url",
-        "description": "Specify the URL of the ManageEngine Log360 server to which you will connect and perform the automated operations.",
+        "description": "Specify the URL of the ManageEngine Log360 server to connect and perform the automated operations.",
         "tooltip": "Specify the URL of the ManageEngine Log360 server to which you will connect and perform the automated operations."
       },
       {
@@ -33,7 +33,7 @@
         "visible": true,
         "type": "password",
         "name": "token",
-        "description": "Specify the auth token generated from API Settings page to access the ManageEngine Log360 endpoint.",
+        "description": "Specify the auth token generated from API Settings page to access the ManageEngine Log360 endpoint. To generate an API key, refer to Steps to generate AuthToken on ManageEngine Log360 documentation.",
         "tooltip": "Specify the auth token generated from API Settings page to access the ManageEngine Log360 endpoint."
       },
       {
@@ -44,8 +44,8 @@
         "type": "checkbox",
         "name": "verify_ssl",
         "value": true,
-        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
-        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is selected, i.e., set to true.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is selected, i.e., set to true."
       }
     ]
   },
@@ -53,7 +53,7 @@
     {
       "operation": "invoke_search",
       "title": "Get Events List",
-      "description": "Retrieves a detailed list of events from the ManageEngine Log360 server based on filters like search query, hosts, groups and other criteria that you have specified.",
+      "description": "Retrieves a detailed list of events from the ManageEngine Log360 server based on the search query, hosts, groups and other filter criteria that you have specified.",
       "category": "investigation",
       "annotation": "invoke_search",
       "output_schema": {
@@ -105,7 +105,7 @@
           "name": "query",
           "placeholder": "e.g. EVENTID = xxxxx",
           "tooltip": "Specify the search query to retrieve events from ManageEngine Log360.",
-          "description": "Specify the search query to retrieve events from ManageEngine Log360."
+          "description": "(Optional) Specify the search query to retrieve events from ManageEngine Log360."
         },
         {
           "title": "From",
@@ -115,7 +115,7 @@
           "type": "datetime",
           "name": "from",
           "tooltip": "Specify the start time for search. Default: current time - 24 hours.",
-          "description": "Specify the start time for search. Default: current time - 24 hours."
+          "description": "(Optional) Specify the start date and time to search and retrieve events from ManageEngine Log360. By default, the date and time are set to 24 hours ago. "
         },
         {
           "title": "To",
@@ -125,7 +125,7 @@
           "type": "datetime",
           "name": "to",
           "tooltip": "Specify the End time for search. Default: current time.",
-          "description": "Specify the End time for search. Default: current time."
+          "description": "(Optional) Specify the end date and time to search and retrieve events from ManageEngine Log360. By default, the current date and time are used. "
         },
         {
           "title": "Hosts",
@@ -135,7 +135,7 @@
           "type": "text",
           "name": "hosts",
           "tooltip": "Specify the comma-separated list of hosts to limit the search to these specific hosts. Default value = all",
-          "description": "Specify the comma-separated list of hosts to limit the search to these specific hosts. Default value = all"
+          "description": "(Optional) Specify a comma-separated list of hosts to filter the search to these specific hosts when retrieving events from ManageEngine Log360. By default, it is set to all. "
         },
         {
           "title": "Groups",
@@ -145,14 +145,14 @@
           "type": "text",
           "name": "groups",
           "tooltip": "Specify the comma-separated list of groups to limit the search to these specific groups. Default value = all",
-          "description": "Specify the comma-separated list of groups to limit the search to these specific groups. Default value = all"
+          "description": "(Optional) Specify a comma-separated list of groups to filter the search to these specific groups when retrieving events from ManageEngine Log360. By default, it is set to all. "
         }
       ]
     },
     {
       "operation": "get_alerts",
       "title": "Get Alerts List",
-      "description": "Retrieves a detailed list of alerts from the ManageEngine Log360 server based on filters like search query, alert severity, alert status and other criteria that you have specified.",
+      "description": "Retrieves a detailed list of alerts from the ManageEngine Log360 server based on the search query, alert severity, alert status and other filter criteria that you have specified.",
       "category": "investigation",
       "annotation": "get_alerts",
       "output_schema": {
@@ -207,7 +207,7 @@
           "type": "datetime",
           "name": "from",
           "tooltip": "Specify the start time for search. Default: current time - 24 hours.",
-          "description": "Specify the start time for search. Default: current time - 24 hours."
+          "description": "(Optional) Specify the start date and time to search and retrieve alerts from ManageEngine Log360. By default, the date and time are set to 24 hours ago. "
         },
         {
           "title": "To",
@@ -217,7 +217,7 @@
           "type": "datetime",
           "name": "to",
           "tooltip": "Specify the End time for search. Default: current time.",
-          "description": "Specify the End time for search. Default: current time."
+          "description": "(Optional) Specify the end date and time to search and retrieve alerts from ManageEngine Log360. By default, the current date and time are used. "
         },
         {
           "title": "Search Query",
@@ -228,7 +228,7 @@
           "name": "query",
           "placeholder": "e.g. EVENTID = xxxxx",
           "tooltip": "Specify the search query to retrieve alerts from ManageEngine Log360. Default value = *",
-          "description": "Specify the search query to retrieve alerts from ManageEngine Log360. Default value = *"
+          "description": "(Optional) Specify the search query to retrieve alerts from ManageEngine Log360. By default, the search query contains *. "
         },
         {
           "title": "Alert Profiles",
@@ -238,7 +238,7 @@
           "type": "text",
           "name": "alert_profiles",
           "tooltip": "Specify the comma-separated list of alert profiles to retrieve alerts matching these profiles. e.g. 1, 2, 601. Default value = all",
-          "description": "Specify the comma-separated list of alert profiles to retrieve alerts matching these profiles. e.g. 1, 2, 601. Default value = all"
+          "description": "(Optional) Specify a comma-separated list of alert profiles to filter the search to these specific profiles when retrieving alerts from ManageEngine Log360. By default, it is set to all. "
         },
         {
           "title": "Alert Severity",
@@ -253,7 +253,7 @@
           ],
           "name": "severity",
           "tooltip": "Select the severity of the alert to filter alerts retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
-          "description": "Select the severity of the alert to filter alerts retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention"
+          "description": "(Optional) Select the severity of the alert to filter alerts retrieved from ManageEngine Log360. You can choose from the following options: \n\nCritical \n\nTrouble \n\nAttention"
         },
         {
           "title": "Alert Status",
@@ -268,14 +268,14 @@
           ],
           "name": "status",
           "tooltip": "Select the status of the alert to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nClosed \n\nInprogress",
-          "description": "Select the status of the alert to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nClosed \n\nInprogress"
+          "description": "(Optional) Select the status of the alert to filter alerts retrieved from ManageEngine Log360. You can choose from the following options:  \n\nOpen \n\nClosed \n\nInprogress"
         }
       ]
     },
     {
       "operation": "get_alert_profiles",
       "title": "Get Alert Profiles List",
-      "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on filters like alert profile type, alert profile severity and alert profile status.",
+      "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on the alert profile type, alert profile severity, and alert profile status that you have specified.",
       "category": "investigation",
       "annotation": "get_alert_profiles",
       "output_schema": {
@@ -316,7 +316,7 @@
           ],
           "name": "type",
           "tooltip": "Select the alert profile type to filter alert profiles retrieved based on your selection from the following options:  \n\nCorrelation \n\nCustom \n\nPredefined",
-          "description": "Select the alert profile type to filter alert profiles retrieved based on your selection from the following options:  \n\nCorrelation \n\nCustom \n\nPredefined"
+          "description": "(Optional) Select the alert profile type to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nCorrelation \n\nCustom \n\nPredefined"
         },
         {
           "title": "Alert Profile Severity",
@@ -331,7 +331,7 @@
           ],
           "name": "severity",
           "tooltip": "Select the severity of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
-          "description": "Select the severity of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention"
+          "description": "(Optional) Select the severity of the alert profile to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nCritical \n\nTrouble \n\nAttention"
         },
         {
           "title": "Alert Profile Status",
@@ -345,7 +345,7 @@
           ],
           "name": "status",
           "tooltip": "Select the status of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled ",
-          "description": "Select the status of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled "
+          "description": "(Optional) Select the status of the alert profile to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nEnabled \n\nDisabled "
         }
       ]
     }
