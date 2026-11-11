@@ -3,13 +3,13 @@
   "label": "ManageEngine Log360",
   "description": "ManageEngine Log360 is a unified SIEM solution with integrated DLP and CASB capabilities that detects, prioritizes, investigates, and responds to security threats.",
   "publisher": "Fortinet",
-  "cs_approved": true,
+  "cs_approved": false,
   "cs_compatible": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "category": "SIEM",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/manageengine-log360/945/manageengine-log360-v1-0-0",
+  "help_online": "",
   "ingestion_supported": true,
   "ingestion_modes": [
     "scheduled"
@@ -56,49 +56,11 @@
       "description": "Retrieves a detailed list of events from the ManageEngine Log360 server based on the search query, hosts, groups and other filter criteria that you have specified.",
       "category": "investigation",
       "annotation": "invoke_search",
-      "output_schema": {
-        "cursor": "",
-        "results": {
-          "hits": [
-            {
-              "Disk": "",
-              "Time": "",
-              "Type": "",
-              "Device": "",
-              "Object": "",
-              "Policy": "",
-              "Source": "",
-              "LogType": "",
-              "Message": "",
-              "User Id": "",
-              "Event ID": "",
-              "Severity": "",
-              "Username": "",
-              "Action ID": "",
-              "Category Id": "",
-              "Device Type": "",
-              "DisplayName": "",
-              "Source Name": "",
-              "Event Details": "",
-              "Severity Type": "",
-              "Source Region": "",
-              "Task Category": "",
-              "Operation Type": "",
-              "Application Name": "",
-              "Destination Name": "",
-              "Event Correlator": "",
-              "Destination Region": ""
-            }
-          ],
-          "total_hits": "",
-          "hits_count_in_current_page": ""
-        }
-      },
       "enabled": true,
       "parameters": [
         {
           "title": "Search Query",
-          "required": false,
+          "required": true,
           "editable": true,
           "visible": true,
           "type": "text",
@@ -108,46 +70,96 @@
           "description": "(Optional) Specify the search query to retrieve events from ManageEngine Log360."
         },
         {
-          "title": "From",
-          "required": false,
+          "title": "Start DateTime",
+          "required": true,
           "editable": true,
           "visible": true,
           "type": "datetime",
           "name": "from",
-          "tooltip": "Specify the start time for search. Default: current time - 24 hours.",
-          "description": "(Optional) Specify the start date and time to search and retrieve events from ManageEngine Log360. By default, the date and time are set to 24 hours ago. "
+          "tooltip": "Specify the start date and time to search and retrieve events from ManageEngine Log360.",
+          "description": "(Optional) Specify the start date and time to search and retrieve events from ManageEngine Log360."
         },
         {
-          "title": "To",
-          "required": false,
+          "title": "End DateTime",
+          "required": true,
           "editable": true,
           "visible": true,
           "type": "datetime",
           "name": "to",
-          "tooltip": "Specify the End time for search. Default: current time.",
-          "description": "(Optional) Specify the end date and time to search and retrieve events from ManageEngine Log360. By default, the current date and time are used. "
+          "tooltip": "Specify the end date and time to search and retrieve events from ManageEngine Log360.",
+          "description": "(Optional) Specify the end date and time to search and retrieve events from ManageEngine Log360."
         },
         {
-          "title": "Hosts",
+          "title": "Log Host IDs",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
-          "name": "hosts",
-          "tooltip": "Specify the comma-separated list of hosts to limit the search to these specific hosts. Default value = all",
-          "description": "(Optional) Specify a comma-separated list of hosts to filter the search to these specific hosts when retrieving events from ManageEngine Log360. By default, it is set to all. "
+          "name": "log_source_ids",
+          "placeholder": "For ex: 1,2,3 or [1,2,3]",
+          "tooltip": "Specify the comma-separated list of host IDs to limit the search to these specific hosts. Maximum: 100 host IDs",
+          "description": "(Optional) Specify a comma-separated list of host IDs to filter the search to these specific hosts when retrieving events from ManageEngine Log360. Maximum: 100 host IDs"
         },
         {
-          "title": "Groups",
+          "title": "Log Types",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
-          "name": "groups",
-          "tooltip": "Specify the comma-separated list of groups to limit the search to these specific groups. Default value = all",
-          "description": "(Optional) Specify a comma-separated list of groups to filter the search to these specific groups when retrieving events from ManageEngine Log360. By default, it is set to all. "
+          "name": "log_types",
+          "tooltip": "Specify the comma-separated list of log types to limit the search to these specific log. Maximum: 100 log types",
+          "description": "(Optional) Specify a comma-separated list of log types to filter the search to these specific log type when retrieving events from ManageEngine Log360. Maximum: 100 log types"
+        },
+        {
+          "title": "Log Source Group IDs",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "log_source_group_ids",
+          "placeholder": "For ex: 1,2,3 or [1,2,3]",
+          "tooltip": "Specify the comma-separated list of source group IDs to limit the search to these specific groups. Maximum: 100 group IDs",
+          "description": "(Optional) Specify a comma-separated list of source group IDs to limit to filter the search to these specific groups when retrieving events from ManageEngine Log360. Maximum: 100 group IDs"
+        },
+        {
+          "title": "Response Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Client",
+            "Server"
+          ],
+          "value": "Server",
+          "name": "response_type",
+          "tooltip": "Select the response type of the events to filter results retrieved based on your selection from the following options:  \n\nClient \n\nServer.",
+          "description": "(Optional) Select the response type of the events to filter results retrieved from ManageEngine Log360. You can choose from the following options: \n\nClient \n\nServer."
         }
-      ]
+      ],
+      "output_schema": {
+        "data": {
+          "hits": [
+            {
+              "Time": "",
+              "UUID": "",
+              "Device": "",
+              "LogType": "",
+              "Message": "",
+              "FORMATID": "",
+              "Host Type": "",
+              "Common Severity": "",
+              "IPAddress1_s_custom": "",
+              "IPAddress2_s_custom": "",
+              "MACAddress_s_custom": ""
+            }
+          ]
+        },
+        "meta": {
+          "total_items": "",
+          "items_in_current_page": ""
+        }
+      }
     },
     {
       "operation": "get_alerts",
@@ -155,80 +167,38 @@
       "description": "Retrieves a detailed list of alerts from the ManageEngine Log360 server based on the search query, alert severity, alert status and other filter criteria that you have specified.",
       "category": "investigation",
       "annotation": "get_alerts",
-      "output_schema": {
-        "cursor": "",
-        "results": {
-          "hits": [
-            {
-              "Policy": "",
-              "Alert_Status": "",
-              "Operation Type": "",
-              "Message": "",
-              "Alert_Profile_Name": "",
-              "Destination Name": "",
-              "Event Details": "",
-              "Time": "",
-              "Source": "",
-              "DisplayName": "",
-              "Application Name": "",
-              "Disk": "",
-              "Task Category": "",
-              "User Id": "",
-              "Source Name": "",
-              "Source Region": "",
-              "Device": "",
-              "Action ID": "",
-              "LogType": "",
-              "Alert_Severity": "",
-              "Device Type": "",
-              "Severity": "",
-              "Destination Region": "",
-              "Event ID": "",
-              "Category Id": "",
-              "Event Correlator": "",
-              "Type": "",
-              "Username": "",
-              "State": "",
-              "Object": "",
-              "Severity Type": ""
-            }
-          ],
-          "total_hits": "",
-          "hits_count_in_current_page": ""
-        }
-      },
       "enabled": true,
       "parameters": [
         {
-          "title": "From",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "datetime",
-          "name": "from",
-          "tooltip": "Specify the start time for search. Default: current time - 24 hours.",
-          "description": "(Optional) Specify the start date and time to search and retrieve alerts from ManageEngine Log360. By default, the date and time are set to 24 hours ago. "
-        },
-        {
-          "title": "To",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "datetime",
-          "name": "to",
-          "tooltip": "Specify the End time for search. Default: current time.",
-          "description": "(Optional) Specify the end date and time to search and retrieve alerts from ManageEngine Log360. By default, the current date and time are used. "
-        },
-        {
           "title": "Search Query",
-          "required": false,
+          "required": true,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "query",
           "placeholder": "e.g. EVENTID = xxxxx",
-          "tooltip": "Specify the search query to retrieve alerts from ManageEngine Log360. Default value = *",
-          "description": "(Optional) Specify the search query to retrieve alerts from ManageEngine Log360. By default, the search query contains *. "
+          "tooltip": "Specify the search query to retrieve alerts from ManageEngine Log360.",
+          "description": "(Optional) Specify the search query to retrieve alerts from ManageEngine Log360."
+        },
+        {
+          "title": "Start DateTime",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "from",
+          "tooltip": "Specify the start date and time to search and retrieve alerts from ManageEngine Log360.",
+          "description": "(Optional) Specify the start date and time to search and retrieve alerts from ManageEngine Log360."
+        },
+        {
+          "title": "End DateTime",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "to",
+          "tooltip": "Specify the end date and time to search and retrieve alerts from ManageEngine Log360.",
+          "description": "(Optional) Specify the end date and time to search and retrieve alerts from ManageEngine Log360."
         },
         {
           "title": "Alert Profiles",
@@ -237,8 +207,9 @@
           "visible": true,
           "type": "text",
           "name": "alert_profiles",
-          "tooltip": "Specify the comma-separated list of alert profiles to retrieve alerts matching these profiles. e.g. 1, 2, 601. Default value = all",
-          "description": "(Optional) Specify a comma-separated list of alert profiles to filter the search to these specific profiles when retrieving alerts from ManageEngine Log360. By default, it is set to all. "
+          "placeholder": "For ex: 1,2,3 or [1,2,3]",
+          "tooltip": "Specify the comma-separated list of alert profiles to retrieve alerts matching these profiles. Maximum: 100 alert profile IDs.",
+          "description": "(Optional) Specify a comma-separated list of alert profiles to filter the search to these specific profiles when retrieving alerts from ManageEngine Log360. Maximum: 100 alert profile IDs."
         },
         {
           "title": "Alert Severity",
@@ -263,14 +234,54 @@
           "type": "multiselect",
           "options": [
             "Open",
-            "Closed",
-            "Inprogress"
+            "InProgress",
+            "Closed"
           ],
           "name": "status",
-          "tooltip": "Select the status of the alert to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nClosed \n\nInprogress",
-          "description": "(Optional) Select the status of the alert to filter alerts retrieved from ManageEngine Log360. You can choose from the following options:  \n\nOpen \n\nClosed \n\nInprogress"
+          "tooltip": "Select the status of the alert to filter alerts retrieved based on your selection from the following options:  \n\nOpen \n\nInProgress \n\nClosed.",
+          "description": "(Optional) Select the status of the alert to filter alerts retrieved from ManageEngine Log360. You can choose from the following options:  \n\nOpen \n\nInProgress \n\nClosed."
+        },
+        {
+          "title": "Response Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Client",
+            "Server"
+          ],
+          "value": "Server",
+          "name": "response_type",
+          "tooltip": "Select the response type of the alert to filter results retrieved based on your selection from the following options:  \n\nClient \n\nServer.",
+          "description": "(Optional) Select the response type of the alert to filter results retrieved from ManageEngine Log360. You can choose from the following options: \n\nClient \n\nServer."
         }
-      ]
+      ],
+      "output_schema": {
+        "data": {
+          "hits": [
+            {
+              "Display Name": {},
+              "Category": "",
+              "Message": "",
+              "User Name": "",
+              "Severity": "",
+              "Time": "",
+              "Event ID": "",
+              "Source": "",
+              "Alert Severity": "",
+              "Log Source Type": "",
+              "Type": "",
+              "Profile Name": "",
+              "Log Source": ""
+            }
+          ],
+          "meta": {
+            "total_items": "",
+            "items_in_current_page": ""
+          }
+        }
+      }
     },
     {
       "operation": "get_alert_profiles",
@@ -278,29 +289,6 @@
       "description": "Retrieves a detailed list of alert profiles from the ManageEngine Log360 server based on the alert profile type, alert profile severity, and alert profile status as the filter criteria that you have specified.",
       "category": "investigation",
       "annotation": "get_alert_profiles",
-      "output_schema": {
-        "Number of Records": "",
-        "Correlation Alert Profiles": [
-          {
-            "Status": "",
-            "Type": "",
-            "Severity": "",
-            "Alert Id": "",
-            "Alert Profile Name": "",
-            "Notifications": []
-          }
-        ],
-        "Profile Based Alerts": [
-          {
-            "Status": "",
-            "Type": "",
-            "Severity": "",
-            "Alert Id": "",
-            "Alert Profile Name": "",
-            "Notifications": []
-          }
-        ]
-      },
       "enabled": true,
       "parameters": [
         {
@@ -308,18 +296,115 @@
           "required": false,
           "editable": true,
           "visible": true,
-          "type": "multiselect",
+          "type": "select",
           "options": [
-            "Correlation",
+            "Predefined",
             "Custom",
-            "Predefined"
+            "Compliance",
+            "Correlation",
+            "Sigma"
           ],
           "name": "type",
-          "tooltip": "Select the alert profile type to filter alert profiles retrieved based on your selection from the following options:  \n\nCorrelation \n\nCustom \n\nPredefined",
-          "description": "(Optional) Select the alert profile type to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nCorrelation \n\nCustom \n\nPredefined"
+          "tooltip": "Select the alert profile type to filter alert profiles retrieved based on your selection from the following options:  \n\nPredefined \n\nCustom \n\nCompliance \n\nCorrelation  \n\nSigma.",
+          "description": "(Optional) Select the alert profile type to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nPredefined \n\nCustom \n\nCompliance \n\nCorrelation  \n\nSigma."
         },
         {
           "title": "Alert Profile Severity",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Critical",
+            "Trouble",
+            "Attention"
+          ],
+          "name": "severity",
+          "tooltip": "Select the severity of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention.",
+          "description": "(Optional) Select the severity of the alert profile to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nCritical \n\nTrouble \n\nAttention."
+        },
+        {
+          "title": "Alert Profile Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Enabled",
+            "Disabled"
+          ],
+          "name": "status",
+          "tooltip": "Select the status of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled ",
+          "description": "(Optional) Select the status of the alert profile to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nEnabled \n\nDisabled "
+        },
+        {
+          "title": "Response Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Client",
+            "Server"
+          ],
+          "value": "Server",
+          "name": "response_type",
+          "tooltip": "Select the response type of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nClient \n\nServer.",
+          "description": "(Optional) Select the response type of the alert profile to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nClient \n\nServer."
+        },
+        {
+          "title": "Limit",
+          "description": "(Optional) Specify the maximum number of results, per page, that this operation should return. By default, this value is set as 100 and the maximum is 1000.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 100,
+          "tooltip": "Specify the maximum number of results, per page, that this operation should return. By default, this value is set as 100 and the maximum is 1000."
+        },
+        {
+          "title": "Offset",
+          "name": "from",
+          "description": "(Optional) Index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say users starting from the 10th user. By default, this is set as 1.",
+          "value": 1,
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say users starting from the 10th user. By default, this is set as 1."
+        }
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "status": "",
+            "severity": "",
+            "created_by": "",
+            "profile_id": "",
+            "creator_type": "",
+            "profile_name": "",
+            "profile_type": "",
+            "notification_type": []
+          }
+        ],
+        "meta": {
+          "per_page": "",
+          "total_items": "",
+          "total_pages": ""
+        }
+      }
+    },
+    {
+      "operation": "get_incidents_list",
+      "title": "Get Incidents List",
+      "description": "Retrieves a detailed list of incidents from the ManageEngine Log360 server based on the filter criteria that you have specified.",
+      "category": "investigation",
+      "annotation": "get_incidents_list",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident Severity",
           "required": false,
           "editable": true,
           "visible": true,
@@ -330,24 +415,202 @@
             "Attention"
           ],
           "name": "severity",
-          "tooltip": "Select the severity of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
-          "description": "(Optional) Select the severity of the alert profile to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nCritical \n\nTrouble \n\nAttention"
+          "tooltip": "Select the severity of the incident to filter incidents retrieved based on your selection from the following options:  \n\nCritical \n\nTrouble \n\nAttention",
+          "description": "(Optional) Select the severity of the incident to filter incidents retrieved from ManageEngine Log360. You can choose from the following options: \n\nCritical \n\nTrouble \n\nAttention"
         },
         {
-          "title": "Alert Profile Status",
+          "title": "Incident Status",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "multiselect",
           "options": [
-            "Enabled",
-            "Disabled"
+            "Open",
+            "InProgress",
+            "Closed"
           ],
           "name": "status",
-          "tooltip": "Select the status of the alert profile to filter alert profiles retrieved based on your selection from the following options:  \n\nEnabled \n\nDisabled ",
-          "description": "(Optional) Select the status of the alert profile to filter alert profiles retrieved from ManageEngine Log360. You can choose from the following options: \n\nEnabled \n\nDisabled "
+          "tooltip": "Select the status of the incident to filter incidents retrieved based on your selection from the following options:  \n\nOpen \n\nInProgress \n\nClosed.",
+          "description": "(Optional) Select the status of the incident to filter incidents retrieved from ManageEngine Log360. You can choose from the following options:  \n\nOpen \n\nInProgress \n\nClosed."
+        },
+        {
+          "title": "Assignee",
+          "name": "created_by",
+          "description": "(Optional) Filters incidents based on created users.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Filters incidents based on created users."
+        },
+        {
+          "title": "Assignee",
+          "name": "assignee",
+          "description": "(Optional) Filters incidents based on assignee.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Filters incidents based on assignee."
+        },
+        {
+          "title": "Response Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Client",
+            "Server"
+          ],
+          "value": "Server",
+          "name": "response_type",
+          "tooltip": "Select the response type of the incident to filter results retrieved based on your selection from the following options:  \n\nClient \n\nServer.",
+          "description": "(Optional) Select the response type of the incident to filter results retrieved from ManageEngine Log360. You can choose from the following options: \n\nClient \n\nServer."
+        },
+        {
+          "title": "Limit",
+          "description": "(Optional) Specify the maximum number of results, per page, that this operation should return. By default, this value is set as 10 and the maximum is 100.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 10,
+          "tooltip": "Specify the maximum number of results, per page, that this operation should return. By default, this value is set as 10 and the maximum is 100."
+        },
+        {
+          "title": "Offset",
+          "name": "from",
+          "description": "(Optional) Index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say users starting from the 10th user. By default, this is set as 1.",
+          "value": 1,
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say users starting from the 10th user. By default, this is set as 1."
         }
-      ]
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "severity": "",
+            "created_time": "",
+            "incident_id": "",
+            "assign_to": "",
+            "due_date": "",
+            "incident_description": "",
+            "incident_name": "",
+            "created_by": "",
+            "status": ""
+          }
+        ],
+        "meta": {
+          "per_page": "",
+          "total_pages": "",
+          "total_items": ""
+        }
+      }
+    },
+    {
+      "operation": "get_incident_details",
+      "title": "Get Incident Details",
+      "description": "Retrieves a details of a specific incident from the ManageEngine Log360 server based on the incident ID that you have specified.",
+      "category": "investigation",
+      "annotation": "get_incident_details",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident ID",
+          "name": "incident_id",
+          "description": "Specify the unique ID of the incident to retrieve it's details.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the unique ID of the incident to retrieve it's details."
+        }
+      ],
+      "output_schema": {
+        "data": {
+          "actors": [],
+          "notes": [
+            {
+              "note": "",
+              "added_by": "",
+              "time": ""
+            }
+          ],
+          "evidence": [],
+          "activity": [
+            {
+              "activity": "",
+              "description": "",
+              "time": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "operation": "execute_an_api_request",
+      "title": "Execute an API Request",
+      "annotation": "execute_an_api_request",
+      "description": "Sends an API request to any API endpoint based on specified HTTP method, endpoint, and other input parameters that you have specified, enabling flexible API interactions tailored to user needs.",
+      "category": "miscellaneous",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "method",
+          "title": "HTTP Method",
+          "type": "select",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Select an HTTP action for the request. You can select from the following options: DELETE GET PATCH POST PUT",
+          "options": [
+            "DELETE",
+            "GET",
+            "PATCH",
+            "POST",
+            "PUT"
+          ],
+          "tooltip": "Select an HTTP action for the request. You can select from the following options: DELETE GET PATCH POST PUT"
+        },
+        {
+          "title": "Endpoint",
+          "name": "endpoint",
+          "tooltip": "Specify the target API URL path for request.",
+          "description": "Specify the target API URL path for the request. For example, if the website is https://example.com and URL path is https://example.com/api/v2/incidents/search, the endpoint would be incidents/search.",
+          "type": "text",
+          "placeholder": "alerts/profile",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Query Parameters",
+          "name": "params",
+          "description": "(Optional) Specify any optional parameters to add to the URL and refine the request.",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "(Optional) Specify any optional parameters to add to the URL and refine the request."
+        },
+        {
+          "name": "data",
+          "title": "Request Payload",
+          "type": "json",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "description": "(Optional) Specify data, as JSON, to be sent as the request payload (typically for POST or PUT requests).",
+          "tooltip": "(Optional) Specify data, as JSON, to be sent as the request payload (typically for POST or PUT requests)."
+        }
+      ],
+      "output_schema": {}
     }
   ]
 }

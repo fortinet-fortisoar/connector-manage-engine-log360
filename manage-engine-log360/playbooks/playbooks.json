@@ -2,15 +2,13 @@
   "type": "workflow_collections",
   "data": [
     {
-      "@context": "/api/3/contexts/WorkflowCollection",
       "@type": "WorkflowCollection",
-      "name": "Sample - ManageEngine Log360 - 1.0.0",
+      "name": "Sample - ManageEngine Log360 - 2.0.0",
       "description": "Sample playbooks for \"ManageEngine Log360\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
       "visible": true,
       "image": null,
-      "id": 188,
-      "createDate": 1723456410.396189,
-      "modifyDate": 1723456410.396189,
+      "uuid": "3dc06028-322b-4ab4-9ace-6c44f12c16bc",
+      "id": 328,
       "deletedAt": null,
       "importedBy": [],
       "recordTags": [
@@ -18,6 +16,222 @@
         "manage-engine-log360"
       ],
       "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident Details",
+          "aliasName": null,
+          "tag": null,
+          "description": "Retrieves a details of a specific incident from the ManageEngine Log360 server based on the incident ID that you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1788450014,
+          "collection": "/api/3/workflow_collections/3dc06028-322b-4ab4-9ace-6c44f12c16bc",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/11e61ecd-4269-4bf6-9c84-f33238ae205e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident Details",
+              "description": null,
+              "arguments": {
+                "name": "ManageEngine Log360",
+                "config": "3b2b2765-c556-4533-bdc2-51a855c4e8c0",
+                "params": {
+                  "incident_id": "1"
+                },
+                "version": "2.0.0",
+                "connector": "manage-engine-log360",
+                "operation": "get_incident_details",
+                "operationTitle": "Get Incident Details",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "aa5473db-5749-4821-b72c-3ab06df58802"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "79f0b07c-d5a2-4f40-8673-6e050ab5ca31",
+                "title": "ManageEngine Log360: Get Incident Details",
+                "resources": [
+                  "alerts"
+                ],
+                "__triggerLimit": true,
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "triggerOnSource": true,
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "showToasterMessage": {
+                  "visible": false,
+                  "messageVisible": true
+                },
+                "triggerOnReplicate": false,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "11e61ecd-4269-4bf6-9c84-f33238ae205e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Incident Details",
+              "targetStep": "/api/3/workflow_steps/aa5473db-5749-4821-b72c-3ab06df58802",
+              "sourceStep": "/api/3/workflow_steps/11e61ecd-4269-4bf6-9c84-f33238ae205e",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "560c77dc-d81c-4537-86d1-3cbeb383311b"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "116cc35b-fba8-4ddf-80fa-d78d39eb4dc4",
+          "id": 5261,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "ManageEngine",
+            "manage-engine-log360"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incidents List",
+          "aliasName": null,
+          "tag": null,
+          "description": "Retrieves a detailed list of incidents from the ManageEngine Log360 server based on the filter criteria that you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1788449904,
+          "collection": "/api/3/workflow_collections/3dc06028-322b-4ab4-9ace-6c44f12c16bc",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/43c09bbe-4876-4c79-b825-64942339c93d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incidents List",
+              "description": null,
+              "arguments": {
+                "name": "ManageEngine Log360",
+                "config": "3b2b2765-c556-4533-bdc2-51a855c4e8c0",
+                "params": {
+                  "from": 1,
+                  "limit": 10,
+                  "status": [],
+                  "assignee": "",
+                  "severity": [],
+                  "created_by": "",
+                  "response_type": "Server"
+                },
+                "version": "2.0.0",
+                "connector": "manage-engine-log360",
+                "operation": "get_incidents_list",
+                "operationTitle": "Get Incidents List",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8338f073-f05e-4197-8de4-4df1efdccedb"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "00cb9b2c-061e-4d79-89cf-7ecced895b50",
+                "title": "ManageEngine Log360: Get Incidents List",
+                "resources": [
+                  "alerts"
+                ],
+                "__triggerLimit": true,
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "triggerOnSource": true,
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "showToasterMessage": {
+                  "visible": false,
+                  "messageVisible": true
+                },
+                "triggerOnReplicate": false,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "43c09bbe-4876-4c79-b825-64942339c93d"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Incidents List",
+              "targetStep": "/api/3/workflow_steps/8338f073-f05e-4197-8de4-4df1efdccedb",
+              "sourceStep": "/api/3/workflow_steps/43c09bbe-4876-4c79-b825-64942339c93d",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "287bb42a-503a-498d-a0f0-6fb76f1f8812"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "38e254d4-3d34-433d-bbe1-5e554d069311",
+          "id": 5262,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "ManageEngine",
+            "manage-engine-log360"
+          ]
+        },
         {
           "@type": "Workflow",
           "triggerLimit": null,
@@ -32,7 +246,7 @@
           "parameters": [],
           "synchronous": false,
           "lastModifyDate": 1718243685,
-          "collection": "/api/3/workflow_collections/513c94f0-adcf-4ff8-a798-71aadccc20c1",
+          "collection": "/api/3/workflow_collections/3dc06028-322b-4ab4-9ace-6c44f12c16bc",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/a39e620c-6bc8-4bbd-b973-6be3c0050830",
           "steps": [
@@ -120,8 +334,10 @@
           ],
           "groups": [],
           "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
           "uuid": "588465dc-88d8-4fb5-a3e1-6595d03e91a2",
-          "id": 2253,
+          "id": 5263,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -146,8 +362,8 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": null,
-          "collection": "/api/3/workflow_collections/513c94f0-adcf-4ff8-a798-71aadccc20c1",
+          "lastModifyDate": 1788439651,
+          "collection": "/api/3/workflow_collections/3dc06028-322b-4ab4-9ace-6c44f12c16bc",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/3af190d0-0b5b-44a2-a697-fd4e87918750",
           "steps": [
@@ -157,16 +373,25 @@
               "description": null,
               "arguments": {
                 "name": "ManageEngine Log360",
-                "config": "''",
-                "params": [],
-                "version": "1.0.0",
+                "config": "cb422e52-5c82-477d-9ae7-a8d1316d6c84",
+                "params": {
+                  "to": "2026-09-03T05:59:41.492Z",
+                  "from": "2026-07-31T18:30:00.000Z",
+                  "query": "192.168.1.10",
+                  "log_types": "",
+                  "response_type": "Client",
+                  "log_source_ids": "",
+                  "log_source_group_ids": ""
+                },
+                "version": "2.0.0",
                 "connector": "manage-engine-log360",
                 "operation": "invoke_search",
-                "operationTitle": "Get Events List"
+                "operationTitle": "Get Events List",
+                "step_variables": []
               },
               "status": null,
-              "top": "120",
-              "left": "188",
+              "top": "165",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "group": null,
               "uuid": "bcfc73bb-b980-4fea-aaa1-a66fec9b94dd"
@@ -192,8 +417,8 @@
                 "singleRecordExecution": false
               },
               "status": null,
-              "top": "20",
-              "left": "20",
+              "top": "30",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
               "group": null,
               "uuid": "3af190d0-0b5b-44a2-a697-fd4e87918750"
@@ -213,8 +438,10 @@
           ],
           "groups": [],
           "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
           "uuid": "7e12948b-df49-47e8-83df-895c43a47e1d",
-          "id": 2254,
+          "id": 5264,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -237,8 +464,8 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1723532029,
-          "collection": "/api/3/workflow_collections/513c94f0-adcf-4ff8-a798-71aadccc20c1",
+          "lastModifyDate": 1793724525,
+          "collection": "/api/3/workflow_collections/3dc06028-322b-4ab4-9ace-6c44f12c16bc",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/2b7b9042-0a64-42cf-9e34-18f58ab7a33f",
           "steps": [
@@ -257,7 +484,7 @@
                 "fetch_alerts_in_last_X_minutes": "21600"
               },
               "status": null,
-              "top": "165",
+              "top": "160",
               "left": "300",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "group": null,
@@ -333,14 +560,14 @@
                 "name": "ManageEngine Log360",
                 "config": "9d2316c0-7925-4cd7-9710-7e654c76dba2",
                 "params": {
-                  "to": "",
+                  "to": "{{vars.current_timestamp}}",
                   "from": "{{vars.last_pull_time}}",
                   "query": "{{vars.query}}",
                   "status": "{{vars.status}}",
                   "severity": "{{vars.severity}}",
                   "alert_profiles": "{{vars.alert_profiles}}"
                 },
-                "version": "1.0.0",
+                "version": "2.0.0",
                 "connector": "manage-engine-log360",
                 "operation": "get_alerts",
                 "operationTitle": "Get Alerts List",
@@ -362,14 +589,14 @@
                 "name": "ManageEngine Log360",
                 "config": "9d2316c0-7925-4cd7-9710-7e654c76dba2",
                 "params": {
-                  "to": "",
+                  "to": "{{vars.current_timestamp}}",
                   "from": "{{vars.last_pull_time}}",
                   "query": "{{vars.query}}",
                   "status": "{{vars.status}}",
                   "severity": "{{vars.severity}}",
                   "alert_profiles": "{{vars.alert_profiles}}"
                 },
-                "version": "1.0.0",
+                "version": "2.0.0",
                 "connector": "manage-engine-log360",
                 "operation": "get_alerts",
                 "operationTitle": "Get Alerts List",
@@ -439,7 +666,7 @@
               "name": "Record List",
               "description": null,
               "arguments": {
-                "record_data": "{% if (vars.steps.Fetch_Alerts.data.results.hits)|type_debug=='list'%}{{vars.steps.Fetch_Alerts.data.results.hits}}{% else %}[]{% endif %}"
+                "record_data": "{% if (vars.steps.Fetch_Alerts.data.data.hits)|type_debug=='list'%}{{vars.steps.Fetch_Alerts.data.data.hits}}{% else %}[]{% endif %}"
               },
               "status": null,
               "top": "840",
@@ -473,13 +700,13 @@
                   "input": {
                     "params": []
                   },
-                  "_configuration_schema": "[\n    {\n        \"title\": \"Pull Alerts Created in Last X min\",\n        \"required\": true,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"integer\",\n        \"name\": \"fetch_alerts_in_last_X_minutes\",\n        \"tooltip\": \"Specify the timeframe in minutes to pull the alerts for the first time.\"\n    },\n    {\n        \"title\": \"Search Query\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"text\",\n        \"name\": \"query\",\n        \"tooltip\": \"Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = * \"\n    },\n    {\n        \"title\": \"Alert Profiles\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"text\",\n        \"name\": \"alert_profiles\",\n        \"tooltip\": \"Specify the comma-separated list of alert profiles to filter alerts. Default value = all\"\n    },\n    {\n        \"title\": \"Alert Severity\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"multiselect\",\n        \"options\": [\n            \"Critical\",\n            \"Trouble\",\n            \"Attention\"\n        ],\n        \"name\": \"severity\",\n        \"tooltip\": \"Select severity to filter alerts retrieved based on your selection from the following options:  \\n\\nCritical \\n\\nTrouble \\n\\nAttention\"\n    },\n    {\n        \"title\": \"Alert Status\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"multiselect\",\n        \"options\": [\n            \"Open\",\n            \"Closed\",\n            \"Inprogress\"\n        ],\n        \"name\": \"status\",\n        \"tooltip\": \"Select status to filter alerts retrieved based on your selection from the following options:  \\n\\nOpen \\n\\nClosed \\n\\nInprogress\"\n    }\n]"
+                  "_configuration_schema": "[\n    {\n        \"title\": \"Pull Alerts Created in Last X min\",\n        \"required\": true,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"integer\",\n        \"name\": \"fetch_alerts_in_last_X_minutes\",\n        \"tooltip\": \"Specify the timeframe in minutes to pull the alerts for the first time.\"\n    },\n    {\n        \"title\": \"Search Query\",\n        \"required\": true,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"text\",\n        \"name\": \"query\",\n        \"tooltip\": \"Specify the query for the search that you want to run on the ManageEngine Log360 server. Default value = * \"\n    },\n    {\n        \"title\": \"Alert Profiles\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"text\",\n        \"name\": \"alert_profiles\",\n        \"tooltip\": \"Specify the comma-separated list of alert profiles to filter alerts. Default value = all\"\n    },\n    {\n        \"title\": \"Alert Severity\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"multiselect\",\n        \"options\": [\n            \"Critical\",\n            \"Trouble\",\n            \"Attention\"\n        ],\n        \"name\": \"severity\",\n        \"tooltip\": \"Select severity to filter alerts retrieved based on your selection from the following options:  \\n\\nCritical \\n\\nTrouble \\n\\nAttention\"\n    },\n    {\n        \"title\": \"Alert Status\",\n        \"required\": false,\n        \"editable\": true,\n        \"visible\": true,\n        \"type\": \"multiselect\",\n        \"options\": [\n            \"Open\",\n            \"Closed\",\n            \"Inprogress\"\n        ],\n        \"name\": \"status\",\n        \"tooltip\": \"Select status to filter alerts retrieved based on your selection from the following options:  \\n\\nOpen \\n\\nClosed \\n\\nInprogress\"\n    }\n]"
                 },
                 "triggerOnSource": true,
                 "triggerOnReplicate": false
               },
               "status": null,
-              "top": "30",
+              "top": "20",
               "left": "300",
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
               "group": null,
@@ -604,15 +831,17 @@
           ],
           "groups": [],
           "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
           "uuid": "845b5bfb-ceb0-4288-8b08-ca4d5236251d",
-          "id": 2255,
+          "id": 5265,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
           "importedBy": [],
           "recordTags": [
-            "dataingestion",
             "create",
+            "dataingestion",
             "fetch",
             "ManageEngine",
             "manage-engine-log360"
@@ -631,8 +860,8 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": null,
-          "collection": "/api/3/workflow_collections/513c94f0-adcf-4ff8-a798-71aadccc20c1",
+          "lastModifyDate": 1793723860,
+          "collection": "/api/3/workflow_collections/3dc06028-322b-4ab4-9ace-6c44f12c16bc",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/1075fbbf-6214-4d84-9928-2c615fa7da81",
           "steps": [
@@ -642,16 +871,20 @@
               "description": null,
               "arguments": {
                 "name": "ManageEngine Log360",
-                "config": "''",
-                "params": [],
-                "version": "1.0.0",
+                "config": "cb422e52-5c82-477d-9ae7-a8d1316d6c84",
+                "params": {
+                  "from": 1,
+                  "limit": 100
+                },
+                "version": "2.0.0",
                 "connector": "manage-engine-log360",
                 "operation": "get_alert_profiles",
-                "operationTitle": "Get Alert Profiles List"
+                "operationTitle": "Get Alert Profiles List",
+                "step_variables": []
               },
               "status": null,
-              "top": "120",
-              "left": "188",
+              "top": "165",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "group": null,
               "uuid": "64878b0c-da7e-49ed-ad53-74ead2100c79"
@@ -677,8 +910,8 @@
                 "singleRecordExecution": false
               },
               "status": null,
-              "top": "20",
-              "left": "20",
+              "top": "30",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
               "group": null,
               "uuid": "1075fbbf-6214-4d84-9928-2c615fa7da81"
@@ -698,8 +931,10 @@
           ],
           "groups": [],
           "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
           "uuid": "9addcea3-e589-40e0-84b3-39897f256ba1",
-          "id": 2256,
+          "id": 5266,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -722,8 +957,8 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1723541715,
-          "collection": "/api/3/workflow_collections/513c94f0-adcf-4ff8-a798-71aadccc20c1",
+          "lastModifyDate": 1793723836,
+          "collection": "/api/3/workflow_collections/3dc06028-322b-4ab4-9ace-6c44f12c16bc",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/8b70da75-19dc-491c-8f02-b2f3d9e2aab0",
           "steps": [
@@ -735,22 +970,22 @@
                 "name": "ManageEngine Log360",
                 "config": "9f5f0a7a-caaa-42db-a568-4311a93db519",
                 "params": {
-                  "to": "",
-                  "from": "",
-                  "query": "",
+                  "to": "2026-11-03T16:37:12.967Z",
+                  "from": "2026-09-30T18:30:00.000Z",
+                  "query": "(  ( severity = 'success' AND type = 'Security' ) )",
                   "status": "",
                   "severity": "",
                   "alert_profiles": ""
                 },
-                "version": "1.0.0",
+                "version": "2.0.0",
                 "connector": "manage-engine-log360",
                 "operation": "get_alerts",
                 "operationTitle": "Get Alerts List",
                 "step_variables": []
               },
               "status": null,
-              "top": "120",
-              "left": "188",
+              "top": "165",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "group": null,
               "uuid": "eea6a92a-6701-4a77-a6ec-4bfa24164dbd"
@@ -776,8 +1011,8 @@
                 "singleRecordExecution": false
               },
               "status": null,
-              "top": "20",
-              "left": "20",
+              "top": "30",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
               "group": null,
               "uuid": "8b70da75-19dc-491c-8f02-b2f3d9e2aab0"
@@ -797,8 +1032,118 @@
           ],
           "groups": [],
           "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
           "uuid": "a92617fe-7323-44ca-90b6-fd58e70c6524",
-          "id": 2257,
+          "id": 5267,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "ManageEngine",
+            "manage-engine-log360"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Execute an API Request",
+          "aliasName": null,
+          "tag": null,
+          "description": "Sends an API request to any API endpoint based on specified HTTP method, endpoint, and other input parameters that you have specified, enabling flexible API interactions tailored to user needs.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1787742982,
+          "collection": "/api/3/workflow_collections/3dc06028-322b-4ab4-9ace-6c44f12c16bc",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fd6527bd-22c2-4cac-8f61-63eeee61b10a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Execute an API Request",
+              "description": null,
+              "arguments": {
+                "name": "ManageEngine Log360",
+                "config": "cb422e52-5c82-477d-9ae7-a8d1316d6c84",
+                "params": {
+                  "data": "",
+                  "method": "GET",
+                  "params": "{\n  \"limit\": 1\n}",
+                  "endpoint": "alerts/profile"
+                },
+                "version": "2.0.0",
+                "connector": "manage-engine-log360",
+                "operation": "execute_an_api_request",
+                "operationTitle": "Execute an API Request",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "3a819aeb-a22a-4758-981e-44fe03194559"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "f2465354-b561-401c-9501-d78d7635d4b5",
+                "title": "ManageEngine Log360: Execute an API Request",
+                "resources": [
+                  "alerts"
+                ],
+                "__triggerLimit": true,
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "triggerOnSource": true,
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "showToasterMessage": {
+                  "visible": false,
+                  "messageVisible": true
+                },
+                "triggerOnReplicate": false,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "fd6527bd-22c2-4cac-8f61-63eeee61b10a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Execute an API Request",
+              "targetStep": "/api/3/workflow_steps/3a819aeb-a22a-4758-981e-44fe03194559",
+              "sourceStep": "/api/3/workflow_steps/fd6527bd-22c2-4cac-8f61-63eeee61b10a",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "688c436c-1bcd-4b7f-808b-f0dfb08857d2"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "fea795e2-d6ca-4757-801a-462f67d26ae9",
+          "id": 5268,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
